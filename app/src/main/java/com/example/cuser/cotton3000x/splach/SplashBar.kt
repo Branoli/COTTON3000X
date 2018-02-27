@@ -1,6 +1,7 @@
-package com.example.cuser.cotton3000x
+package com.example.cuser.cotton3000x.splach
 
 import android.view.View
+import com.example.cuser.cotton3000x.splach.SplashActivity
 import org.jetbrains.anko.*
 
 class SplashBar : AnkoComponent<SplashActivity> {
