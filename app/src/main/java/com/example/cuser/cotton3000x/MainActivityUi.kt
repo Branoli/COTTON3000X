@@ -6,7 +6,9 @@ import org.jetbrains.anko.*
 class MainActivityUi : AnkoComponent<MainActivity> {
     override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
         verticalLayout {
+            horizontalPadding = dip(50)
             val loginEdit = editText {
+                topPadding = dip(200)
                 hint = "Login"
             }
             val passwordEdit = editText {
