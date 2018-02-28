@@ -1,15 +1,14 @@
-package com.example.cuser.cotton3000x.drawerlayout
+package com.example.cuser.cotton3000x.drawerlayoutANKO
 
 
 import android.view.View
-import android.widget.LinearLayout
 import com.example.cuser.cotton3000x.R
 import com.example.cuser.cotton3000x.splach.SplashActivity
 import org.jetbrains.anko.*
 
 
-class nav_header_main : AnkoComponent<SplashActivity> {
-    override fun createView(ui: AnkoContext<SplashActivity>): View = with(ui) {
+class nav_header_main : AnkoComponent<DrawComponent> {
+    override fun createView(ui: AnkoContext<DrawComponent>): View = with(ui) {
         linearLayout{
             lparams(width = matchParent, height = dip(176))
             horizontalPadding = dip(16)
@@ -19,7 +18,7 @@ class nav_header_main : AnkoComponent<SplashActivity> {
 
             //backgroundResource = R.d
             textView("MyName") {
-                text = "ХАЙ"
+                topPadding = dip(16)
             }.lparams(
                     width = wrapContent,
                     height = wrapContent

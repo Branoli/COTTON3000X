@@ -2,7 +2,7 @@ package com.example.cuser.cotton3000x.splach
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.cuser.cotton3000x.drawerlayout.DrawerActivity
+import com.example.cuser.cotton3000x.drawerlayoutANKO.DrawerActivity
 import org.jetbrains.anko.*
 
 

@@ -1,4 +1,4 @@
-package com.example.cuser.cotton3000x.drawerlayout
+package com.example.cuser.cotton3000x.drawerlayoutANKO
 
 import android.view.View
 import com.example.cuser.cotton3000x.splach.SplashActivity
