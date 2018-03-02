@@ -24,7 +24,6 @@ class nav_header_main : AnkoComponent<DrawComponent> {
                     height = wrapContent
             )
             textView("MyName") {
-                text = "ХАЙХАЙ"
             }.lparams(
                     width = wrapContent,
                     height = wrapContent
