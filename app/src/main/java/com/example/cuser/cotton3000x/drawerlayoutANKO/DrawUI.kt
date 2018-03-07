@@ -23,7 +23,7 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
         coordinatorLayout{
             themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
                 toolbar {
-                    id = Ids.toolbar
+                    id = R.id.toolbar
                     backgroundColor = Color.RED
                     popupTheme = R.style.AppTheme_PopupOverlay
                 }.lparams(matchParent, dip(70)){
@@ -43,17 +43,17 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
         navigationView {
             id = R.id.nav_bar
             fitsSystemWindows = true
-            backgroundColor = Color.RED
+            backgroundColor = Color.WHITE
 
             val header = context.themedLinearLayout(R.style.Base_ThemeOverlay_AppCompat_Dark) {
                 orientation = VERTICAL
                 horizontalPadding = dip(16)
                 verticalPadding = dip(16)
                 gravity = Gravity.BOTTOM
-                backgroundColor = Color.GREEN
+                backgroundColor = R.drawable.side_nav_bar
 
                 imageView {
-
+                    setImageResource(R.mipmap.ic_launcher_round)
                 }.lparams(wrapContent, wrapContent){
                     topPadding = dip(8)
                 }
