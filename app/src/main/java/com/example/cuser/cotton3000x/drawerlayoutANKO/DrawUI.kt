@@ -2,19 +2,15 @@ package com.example.cuser.cotton3000x.drawerlayoutANKO
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.appcompat.R.attr.theme
-
+import android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 import android.view.Gravity
-import android.view.Menu
-import android.view.View
+import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import com.example.cuser.cotton3000x.R
 import org.jetbrains.anko.*
-import org.jetbrains.anko.appcompat.v7.actionMenuItemView
-import org.jetbrains.anko.custom.style
-import org.jetbrains.anko.design.appBarLayout
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
+import org.jetbrains.anko.design.themedAppBarLayout
 import org.jetbrains.anko.support.v4._DrawerLayout
 
 class DrawUI(context: Context) : _DrawerLayout(context) {
@@ -25,15 +21,18 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
     init {
         fitsSystemWindows = true
         coordinatorLayout{
-            appBarLayout{
+            themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
                 toolbar {
-                    id = R.id.toolbar
+                    id = Ids.toolbar
                     backgroundColor = Color.RED
                     popupTheme = R.style.AppTheme_PopupOverlay
-                }.lparams(matchParent, dip(70))
+                }.lparams(matchParent, dip(70)){
+                    scrollFlags = SCROLL_FLAG_ENTER_ALWAYS
+                }
             }.lparams(matchParent, wrapContent)
 
             linearLayout{
+                orientation = VERTICAL
                 textView("MyName") {
                 }.lparams(wrapContent, wrapContent)
             }.lparams(matchParent, matchParent)
@@ -46,7 +45,8 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
             fitsSystemWindows = true
             backgroundColor = Color.RED
 
-            val header = context.verticalLayout {
+            val header = context.themedLinearLayout(R.style.Base_ThemeOverlay_AppCompat_Dark) {
+                orientation = VERTICAL
                 horizontalPadding = dip(16)
                 verticalPadding = dip(16)
                 gravity = Gravity.BOTTOM
@@ -69,6 +69,7 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
             addHeaderView(header)
 
             inflateMenu(R.menu.activity_main_drawer)
+
 
         }.lparams(wrapContent, matchParent) {
             fitsSystemWindows = true
