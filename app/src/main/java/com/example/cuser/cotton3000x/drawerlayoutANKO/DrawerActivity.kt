@@ -17,10 +17,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         draw = customView{}
         setContentView(draw)
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
-
         setSupportActionBar(toolbar)
 
         /*

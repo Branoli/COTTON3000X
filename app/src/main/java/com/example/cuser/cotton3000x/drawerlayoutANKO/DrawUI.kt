@@ -26,7 +26,7 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                     id = R.id.toolbar
                     backgroundColor = Color.RED
                     popupTheme = R.style.AppTheme_PopupOverlay
-                }.lparams(matchParent, dip(70)){
+                }.lparams(matchParent, dip(60)){
                     scrollFlags = SCROLL_FLAG_ENTER_ALWAYS
                 }
             }.lparams(matchParent, wrapContent)
