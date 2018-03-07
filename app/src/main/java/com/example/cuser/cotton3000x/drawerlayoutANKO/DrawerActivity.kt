@@ -13,7 +13,7 @@ import org.jetbrains.anko.findOptional
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var draw : DrawActivity
+    private lateinit var draw : DrawUI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
 
-        //setSupportActionBar(R.id.toolbar)
+        setSupportActionBar(R.id.toolbar)
 
         /*
         setSupportActionBar(toolbar)
