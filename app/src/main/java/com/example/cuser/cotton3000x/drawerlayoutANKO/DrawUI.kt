@@ -26,12 +26,14 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                     id = R.id.toolbar
                     backgroundColor = Color.RED
                     popupTheme = R.style.AppTheme_PopupOverlay
-                }.lparams(matchParent, dip(60)){
+                    title = resources.getString(R.string.app_name)
+                }.lparams(matchParent, dip(55)){
                     scrollFlags = SCROLL_FLAG_ENTER_ALWAYS
                 }
             }.lparams(matchParent, wrapContent)
 
             linearLayout{
+                topPadding = dip(55)
                 orientation = VERTICAL
                 textView("MyName") {
                 }.lparams(wrapContent, wrapContent)
