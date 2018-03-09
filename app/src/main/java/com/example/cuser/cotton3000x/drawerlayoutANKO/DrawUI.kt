@@ -1,13 +1,21 @@
 package com.example.cuser.cotton3000x.drawerlayoutANKO
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+import android.support.v7.widget.CardView
+import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
+import android.support.v7.widget.Toolbar
+
 import com.example.cuser.cotton3000x.R
+
 import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.toolbar
+import org.jetbrains.anko.custom.customView
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.design.themedAppBarLayout
@@ -15,14 +23,14 @@ import org.jetbrains.anko.support.v4._DrawerLayout
 
 class DrawUI(context: Context) : _DrawerLayout(context) {
 
-
     private lateinit var textBlock: TextView
 
     init {
         fitsSystemWindows = true
         coordinatorLayout{
             themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
-                toolbar {
+
+                toolbar{
                     id = R.id.toolbar
                     backgroundColor = Color.RED
                     popupTheme = R.style.AppTheme_PopupOverlay
@@ -33,14 +41,15 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
             }.lparams(matchParent, wrapContent)
 
             linearLayout{
+                id = R.id.linear_layout
                 topPadding = dip(55)
                 orientation = VERTICAL
-                textView("MyName") {
-                }.lparams(wrapContent, wrapContent)
+                //textView("text"){
+                    //id = R.id.text_view
+                //}
             }.lparams(matchParent, matchParent)
 
         }.lparams(matchParent, matchParent)
-
 
         navigationView {
             id = R.id.nav_bar

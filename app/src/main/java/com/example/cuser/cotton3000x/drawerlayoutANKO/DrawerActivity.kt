@@ -1,15 +1,23 @@
 package com.example.cuser.cotton3000x.drawerlayoutANKO
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import com.example.cuser.cotton3000x.R
+import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7.contentFrameLayout
+
 import org.jetbrains.anko.custom.customView
-import org.jetbrains.anko.findOptional
+
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -20,10 +28,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         draw = customView{}
         setContentView(draw)
-        val toolbar = findOptional<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
-        /*
+
+        findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
+            textView("text")
+        }
+
+        val toolbar = findOptional<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
@@ -32,7 +43,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         findOptional<NavigationView>(R.id.nav_bar)!!.setNavigationItemSelectedListener(this)
-        */
+
+
 
     }
 
@@ -60,7 +72,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_camera -> {
-
+                findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
+                    textView("nav_camera")
+                }
             }
             R.id.nav_gallery -> {
 
@@ -82,5 +96,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         draw.closeDrawer(GravityCompat.START)
         return true
     }
+}
+data class GitHubRepositoryInfo(val name: String) {
+    class List : ArrayList<GitHubRepositoryInfo>()
+}
 
+inline fun Activity.recyclerView(init: RecyclerView.() -> Unit) {
+    val recyclerView = RecyclerView(this)
+    recyclerView.init()
+    setContentView(recyclerView)
 }
