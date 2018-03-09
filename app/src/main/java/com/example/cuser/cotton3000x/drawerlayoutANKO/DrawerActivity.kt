@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -29,6 +30,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     private lateinit var draw : DrawUI
 
+    private val okHttpClient = OkHttpClient()
+    private val repos = mutableListOf<String>()
+    private val reposAdapter = ReposListAdapter(repos) { repoName ->
+        Toast.makeText(this, repoName, Toast.LENGTH_SHORT).show()
+    }
+
+
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,25 +58,36 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         linearLayoutManager = LinearLayoutManager(this)
         //-------------------------------------------------
         findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
-            textView("text")
+            //textView("text")
             recyclerView {
-                layoutManager = linearLayoutManager
-                Thread(Runnable {
-                    val client = OkHttpClient()
-                    val request = Request.Builder()
-                            .url("https://api.github.com/users/Branoli/repos")
-                            .build()
-                    val response = client.newCall(request).execute()
-                    val responseText = response.body()!!.string()
-                    val repos = Gson().fromJson(responseText, GitHubRepositoryInfo.List::class.java)
-
-                    runOnUiThread {
-                        adapter = AdapterMainActivity(repos)
-                    }
-                    android.util.Log.d("Repos", repos.joinToString { it.name })
-                }).start()
+                adapter = reposAdapter
+                layoutManager = GridLayoutManager(this@DrawerActivity, 2)
             }
         }
+        loadData(this::showData)
+    }
+
+    private fun showData(repos: List<String>) {
+        this.repos.run {
+            clear()
+            addAll(repos)
+        }
+        reposAdapter.notifyDataSetChanged()
+    }
+
+    private fun loadData(onComplete: (List<String>) -> Unit) {
+        Thread {
+            val request = Request.Builder()
+                    .url("https://api.github.com/users/square/repos")
+                    .build()
+            val response = okHttpClient.newCall(request).execute()
+            val respBody = response.body()!!.string()
+            val repos = Gson().fromJson(respBody, GitHubRepositoryInfo.List::class.java)
+            val names = repos.map { it.name }
+            runOnUiThread {
+                onComplete(names)
+            }
+        }.start()
     }
 
     override fun onBackPressed() {
