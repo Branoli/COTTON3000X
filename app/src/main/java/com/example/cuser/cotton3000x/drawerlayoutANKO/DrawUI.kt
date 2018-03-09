@@ -44,9 +44,6 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                 id = R.id.linear_layout
                 topPadding = dip(55)
                 orientation = VERTICAL
-                //textView("text"){
-                    //id = R.id.text_view
-                //}
             }.lparams(matchParent, matchParent)
 
         }.lparams(matchParent, matchParent)

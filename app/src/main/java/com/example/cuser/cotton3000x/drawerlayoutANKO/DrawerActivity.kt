@@ -29,9 +29,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         draw = customView{}
         setContentView(draw)
 
-
         findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
             textView("text")
+            //вот здесь, если так делать правильно
+            recyclerView {
+
+            }
         }
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
@@ -97,6 +100,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 }
+
 data class GitHubRepositoryInfo(val name: String) {
     class List : ArrayList<GitHubRepositoryInfo>()
 }
@@ -106,3 +110,4 @@ inline fun Activity.recyclerView(init: RecyclerView.() -> Unit) {
     recyclerView.init()
     setContentView(recyclerView)
 }
+
