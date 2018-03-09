@@ -1,20 +1,21 @@
 package com.example.cuser.cotton3000x.drawerlayoutANKO
 
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.cuser.cotton3000x.R
+import org.jetbrains.anko.linearLayout
 
 class AdapterMainActivity(private val mDataset:  ArrayList<GitHubRepositoryInfo>) : RecyclerView.Adapter<AdapterMainActivity.ViewHolder>()  {
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val mTextView: TextView = v.findViewById<View>(R.id.repo) as TextView
 
-    }
+    class ViewHolder(var view: SimpleTextView) : RecyclerView.ViewHolder(view)
 
     override fun onBindViewHolder(holder: AdapterMainActivity.ViewHolder, position: Int) {
-        holder.mTextView.text = mDataset[position].name
+        holder.view.text = mDataset[position].name
     }
 
     override fun getItemCount(): Int {
@@ -23,7 +24,9 @@ class AdapterMainActivity(private val mDataset:  ArrayList<GitHubRepositoryInfo>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterMainActivity.ViewHolder{
         val context = parent.context
-        val view = TextView(context)
+        val view = SimpleTextView(context)
+        view.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150)
         return AdapterMainActivity.ViewHolder(view)
     }
 }
+
