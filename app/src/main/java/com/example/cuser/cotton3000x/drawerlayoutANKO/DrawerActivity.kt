@@ -6,13 +6,19 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.cuser.cotton3000x.R
+import com.google.gson.Gson
+import okhttp3.OkHttpClient
+import okhttp3.Request
+
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.contentFrameLayout
 
@@ -23,19 +29,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     private lateinit var draw : DrawUI
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         draw = customView{}
         setContentView(draw)
-
-        findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
-            textView("text")
-            //вот здесь, если так делать правильно
-            recyclerView {
-
-            }
-        }
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -49,6 +49,28 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
 
 
+        //-------------------------------------------------
+        linearLayoutManager = LinearLayoutManager(this)
+        findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
+            textView("text")
+            recyclerView {
+                doAsync {
+                    val client = OkHttpClient()
+                    val request = Request.Builder()
+                            .url("https://api.github.com/users/Branoli/repos")
+                            .build()
+                    val response = client.newCall(request).execute()
+                    val responseText = response.body()!!.string()
+                    val repos = Gson().fromJson(responseText, GitHubRepositoryInfo.List::class.java)
+                    //val names = repos.map { it.name }
+                    uiThread {
+                        layoutManager = linearLayoutManager
+                        adapter = AdapterMainActivity(repos)
+                    }
+                    android.util.Log.d("Repos", repos.joinToString { it.name })
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -108,6 +130,5 @@ data class GitHubRepositoryInfo(val name: String) {
 inline fun Activity.recyclerView(init: RecyclerView.() -> Unit) {
     val recyclerView = RecyclerView(this)
     recyclerView.init()
-    setContentView(recyclerView)
 }
 
