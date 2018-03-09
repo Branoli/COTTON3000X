@@ -47,14 +47,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         findOptional<NavigationView>(R.id.nav_bar)!!.setNavigationItemSelectedListener(this)
 
-
-
-        //-------------------------------------------------
         linearLayoutManager = LinearLayoutManager(this)
+        //-------------------------------------------------
         findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
             textView("text")
             recyclerView {
-                doAsync {
+                layoutManager = linearLayoutManager
+                Thread(Runnable {
                     val client = OkHttpClient()
                     val request = Request.Builder()
                             .url("https://api.github.com/users/Branoli/repos")
@@ -62,13 +61,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     val response = client.newCall(request).execute()
                     val responseText = response.body()!!.string()
                     val repos = Gson().fromJson(responseText, GitHubRepositoryInfo.List::class.java)
-                    //val names = repos.map { it.name }
-                    uiThread {
-                        layoutManager = linearLayoutManager
+
+                    runOnUiThread {
                         adapter = AdapterMainActivity(repos)
                     }
                     android.util.Log.d("Repos", repos.joinToString { it.name })
-                }
+                }).start()
             }
         }
     }
