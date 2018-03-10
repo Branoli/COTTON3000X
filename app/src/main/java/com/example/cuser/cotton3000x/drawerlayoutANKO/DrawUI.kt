@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
 import android.support.v7.widget.Toolbar
+import android.widget.LinearLayout
 
 import com.example.cuser.cotton3000x.R
 
@@ -40,12 +41,12 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                 }
             }.lparams(matchParent, wrapContent)
 
+
             linearLayout{
-                id = R.id.linear_layout
                 topPadding = dip(55)
                 orientation = VERTICAL
+                id = R.id.linear_layout
             }.lparams(matchParent, matchParent)
-
         }.lparams(matchParent, matchParent)
 
         navigationView {

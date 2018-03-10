@@ -10,7 +10,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-
+import android.widget.LinearLayout.VERTICAL
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
@@ -41,9 +41,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         draw = customView{}
-        setContentView(draw)
+        //setContentView(draw)
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,11 +56,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         linearLayoutManager = LinearLayoutManager(this)
         //-------------------------------------------------
-        findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
-            //textView("text")
-            recyclerView {
+        findOptional<LinearLayout>(R.id.linear_layout)!!.linearLayout {
+            orientation = VERTICAL
+            customView<RecyclerView> {
+                lparams(matchParent, matchParent)
                 adapter = reposAdapter
-                layoutManager = GridLayoutManager(this@DrawerActivity, 2)
+                layoutManager = linearLayoutManager
             }
         }
         loadData(this::showData)
@@ -110,7 +110,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_camera -> {
@@ -144,8 +143,10 @@ data class GitHubRepositoryInfo(val name: String) {
     class List : ArrayList<GitHubRepositoryInfo>()
 }
 
+
 inline fun Activity.recyclerView(init: RecyclerView.() -> Unit) {
     val recyclerView = RecyclerView(this)
     recyclerView.init()
+    //setContentView(recyclerView)
 }
 
