@@ -1,22 +1,14 @@
 package com.example.cuser.cotton3000x.drawerlayoutANKO
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.widget.LinearLayout.VERTICAL
 import android.widget.TextView
-import android.support.v7.widget.Toolbar
-import android.widget.LinearLayout
-
 import com.example.cuser.cotton3000x.R
-
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
-import org.jetbrains.anko.custom.customView
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.design.themedAppBarLayout
@@ -40,7 +32,6 @@ class DrawUI(context: Context) : _DrawerLayout(context) {
                     scrollFlags = SCROLL_FLAG_ENTER_ALWAYS
                 }
             }.lparams(matchParent, wrapContent)
-
 
             linearLayout{
                 topPadding = dip(55)

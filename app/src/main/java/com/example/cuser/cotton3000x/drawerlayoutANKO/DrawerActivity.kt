@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar
 import android.widget.LinearLayout.VERTICAL
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.cuser.cotton3000x.R
@@ -24,6 +25,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.contentFrameLayout
 
 import org.jetbrains.anko.custom.customView
+import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +44,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         draw = customView{}
-        //setContentView(draw)
 
         val toolbar = findOptional<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -58,7 +59,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         //-------------------------------------------------
         findOptional<LinearLayout>(R.id.linear_layout)!!.linearLayout {
             orientation = VERTICAL
-            customView<RecyclerView> {
+            recyclerView {
+                id = R.id.recycler_news
                 lparams(matchParent, matchParent)
                 adapter = reposAdapter
                 layoutManager = linearLayoutManager
@@ -113,6 +115,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_camera -> {
+                findOptional<RecyclerView>(R.id.recycler_news)!!.visibility = View.GONE
                 findOptional<LinearLayout>(R.id.linear_layout)!!.contentFrameLayout {
                     textView("nav_camera")
                 }
@@ -141,12 +144,5 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
 data class GitHubRepositoryInfo(val name: String) {
     class List : ArrayList<GitHubRepositoryInfo>()
-}
-
-
-inline fun Activity.recyclerView(init: RecyclerView.() -> Unit) {
-    val recyclerView = RecyclerView(this)
-    recyclerView.init()
-    //setContentView(recyclerView)
 }
 

@@ -4,4 +4,7 @@
     <item name="text_view" type="id" />
     <item name="toolbar" type="id"/>
     <item name="linear_layout" type="id" />
+    <item name="recycler_news" type="id" />
+    <item name="text_news" type="id" />
+    <item name="card_news" type="id" />
 </resources>
