@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/COTTON3000X.iml" filepath="$PROJECT_DIR$/COTTON3000X.iml" />
+      <module fileurl="file://D:\ii\COTTON3000X\COTTON3000X.iml" filepath="D:\ii\COTTON3000X\COTTON3000X.iml" />
       <module fileurl="file://X:\project\COTTON3000X\COTTON3000X.iml" filepath="X:\project\COTTON3000X\COTTON3000X.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://X:\project\COTTON3000X\app\app.iml" filepath="X:\project\COTTON3000X\app\app.iml" />
+      <module fileurl="file://D:\ii\COTTON3000X\app\app.iml" filepath="D:\ii\COTTON3000X\app\app.iml" />
     </modules>
   </component>
 </project>

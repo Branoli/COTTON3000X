@@ -1,5 +1,6 @@
 package com.example.cuser.cotton3000x.drawerlayoutANKO
 
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.LinearLayout.VERTICAL
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
+import org.jetbrains.anko.custom.customView
 
 class ReposListAdapter(
             private val repos: List<String>,
@@ -28,25 +30,30 @@ class ReposListAdapter(
         val linear = LinearLayout(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             orientation = VERTICAL
-            cardView {
-                //elevation = 5f
+
+            customView<CardView>{
+
                 lparams(matchParent, dip(220)){
                     bottomMargin = dip(15)
                     leftMargin = dip(15)
                     rightMargin = dip(15)
                 }
+
                 gravity = Gravity.CENTER
                 setContentPadding(dip(40), dip(10), dip(10), dip(10))
                 cardElevation = 30f
+                //elevation = 30f
                 radius = 10f
 
                 linearLayout {
+                    lparams(wrapContent, wrapContent)
                     orientation = VERTICAL
                     textView {
                         id = R.id.text_news
                     }.lparams(matchParent, matchParent)
-                }.lparams(wrapContent, wrapContent)
+                }
             }
+
         }
 
         return ReposListViewHolder(linear).apply {
